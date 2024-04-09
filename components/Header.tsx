@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { UserButton, useUser } from '@clerk/nextjs'
 import { Loader2 } from 'lucide-react'
+import Link from 'next/link'
 
 const Header = () => {
     const { user, isLoaded } = useUser();
@@ -17,7 +18,7 @@ const Header = () => {
                     <div className='scale-125' >
                         <UserButton />
                     </div>
-                    <Button>Github</Button>
+                    <Link target='_blank' href="https://github.com/ditinagrawal/passman"><Button>Github</Button></Link>
                 </div>
             ) : (<Loader2 className="animate-spin" />)}
         </header>
