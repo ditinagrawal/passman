@@ -170,15 +170,15 @@ const Hero = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {passwords.map(({ password }) => {
+                        {passwords.map((item) => {
                             return (
                                 <>
-                                    {password.email === user?.emailAddresses[0].emailAddress ? (
-                                        <TableRow key={password._id}>
-                                            <TableCell className="font-medium">{password.title}</TableCell>
-                                            <TableCell>{password.username}</TableCell>
+                                    {item.email === user?.emailAddresses[0].emailAddress ? (
+                                        <TableRow key={item._id}>
+                                            <TableCell className="font-medium">{item.title}</TableCell>
+                                            <TableCell>{item.username}</TableCell>
                                             <TableCell>
-                                                <input className="bg-transparent" disabled type={showPassword ? "text" : "password"} value={password.password} />
+                                                <input className="bg-transparent" disabled type={showPassword ? "text" : "password"} value={item.password} />
                                             </TableCell>
                                             <TableCell>
                                                 <AlertDialog>
@@ -193,7 +193,7 @@ const Hero = () => {
                                                                     <div className="grid w-full items-center gap-4">
                                                                         <div className="flex flex-col space-y-1.5">
                                                                             <Label htmlFor="title">Title</Label>
-                                                                            <Input value={password.title} disabled type="text" placeholder="Enter title here" />
+                                                                            <Input value={item.title} disabled type="text" placeholder="Enter title here" />
                                                                         </div>
                                                                         <div className="flex flex-col space-y-1.5">
                                                                             <Label htmlFor="username">Username</Label>
@@ -209,14 +209,14 @@ const Hero = () => {
                                                             </CardContent>
                                                             <CardFooter className="flex justify-between">
                                                                 <AlertDialogCancel onClick={setFormEmpty}>Cancel</AlertDialogCancel>
-                                                                <AlertDialogAction onClick={() => handleUpdate(password._id)}>Continue</AlertDialogAction>
+                                                                <AlertDialogAction onClick={() => handleUpdate(item._id)}>Continue</AlertDialogAction>
                                                             </CardFooter>
                                                         </Card>
                                                     </AlertDialogContent>
                                                 </AlertDialog>
                                             </TableCell>
                                             <TableCell>
-                                                <Trash2 className="cursor-pointer" onClick={() => { deletePassword(password._id) }} />
+                                                <Trash2 className="cursor-pointer" onClick={() => { deletePassword(item._id) }} />
                                             </TableCell>
                                         </TableRow>
                                     ) : (<> </>)}
