@@ -10,7 +10,7 @@ const Header = () => {
     const { user, isLoaded } = useUser();
     return (
         <header className='py-8 container flex items-center justify-between font-mono'>
-            <div className='text-3xl'>
+            <div className='text-3xl max-md:text-xl'>
                 <h1>&lt; <span>passMan</span> /&gt;</h1>
             </div>
             {isLoaded ? (
@@ -18,7 +18,7 @@ const Header = () => {
                     <div className='scale-125' >
                         <UserButton />
                     </div>
-                    <Link target='_blank' href="https://github.com/ditinagrawal/passman"><Button>Github</Button></Link>
+                    <Link target='_blank' href="https://github.com/ditinagrawal/passman"><Button size={"sm"}>Github</Button></Link>
                 </div>
             ) : (<Loader2 className="animate-spin" />)}
         </header>
