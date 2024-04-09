@@ -38,7 +38,7 @@ const Hero = () => {
     const [title, setTitle] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [passwords, setPasswords] = useState([]);
+    const [passwords, setPasswords] = useState<any[]>([])
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
@@ -170,7 +170,7 @@ const Hero = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {passwords.map((password) => {
+                        {passwords.map(({ password }) => {
                             return (
                                 <>
                                     {password.email === user?.emailAddresses[0].emailAddress ? (
