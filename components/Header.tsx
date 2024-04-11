@@ -16,7 +16,7 @@ const Header = () => {
             {isLoaded ? (
                 <div className='flex gap-4 items-center'>
                     <div className='scale-125' >
-                        <UserButton />
+                        <UserButton afterSignOutUrl='/' />
                     </div>
                     <Link target='_blank' href="https://github.com/ditinagrawal/passman"><Button size={"sm"}>Github</Button></Link>
                 </div>
