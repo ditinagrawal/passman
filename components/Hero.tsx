@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-const encryptor = require('simple-encryptor')("passman-secret-key");
+const key = process.env.NEXT_PUBLIC_PASSMAN_SECRET_KEY;
+const encryptor = require('simple-encryptor')(key);
 import {
     AlertDialog,
     AlertDialogAction,
@@ -81,7 +82,8 @@ const Hero = () => {
         try {
             if (!id) return toast.error("Missing Id");
             const email = user?.emailAddresses[0].emailAddress;
-            await axios.patch(`/api/passwords`, { id, email, username: newUsername, password: newPassword });
+            const hashedPassword = encryptor.encrypt(newPassword);
+            await axios.patch(`/api/passwords`, { id, email, username: newUsername, password: hashedPassword });
             toast.success("Password updated successfully");
             setFormEmpty();
             getPasswords();
