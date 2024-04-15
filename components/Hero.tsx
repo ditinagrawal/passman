@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const encryptor = require('simple-encryptor')("passman-secret-key");
 import {
     AlertDialog,
     AlertDialogAction,
@@ -67,7 +67,8 @@ const Hero = () => {
                 return toast.error("Missing Required Fields");
             }
             const email = user?.emailAddresses[0].emailAddress;
-            await axios.post("/api/passwords", { email, title, username, password });
+            const hashedPassword = encryptor.encrypt(password);
+            await axios.post("/api/passwords", { email, title, username, password: hashedPassword });
             toast.success("Password saved successfully");
             setFormEmpty();
             getPasswords();
@@ -171,6 +172,7 @@ const Hero = () => {
                     </TableHeader>
                     <TableBody>
                         {passwords.map((item) => {
+                            const decryptpassword = encryptor.decrypt(item.password);
                             return (
                                 <>
                                     {item.email === user?.emailAddresses[0].emailAddress ? (
@@ -178,7 +180,7 @@ const Hero = () => {
                                             <TableCell className="font-medium">{item.title}</TableCell>
                                             <TableCell>{item.username}</TableCell>
                                             <TableCell>
-                                                <input className="bg-transparent" disabled type={showPassword ? "text" : "password"} value={item.password} />
+                                                <input className="bg-transparent" disabled type={showPassword ? "text" : "password"} value={decryptpassword} />
                                             </TableCell>
                                             <TableCell>
                                                 <AlertDialog>
